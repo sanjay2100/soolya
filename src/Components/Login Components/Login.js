@@ -32,15 +32,34 @@ const Login = () => {
     const[LoginId,setLoginId]=useState("")
     const[Password,setPassword]=useState("")
 
+    const [errLogin,setErrlogin]=useState("")
+    const [errPwd,seterrPwd]=useState("")
+
+    
+
     function LoginFun(e){
         e.preventDefault()
+        setErrlogin("")
+        seterrPwd("")
+        if(LoginId===""||LoginId===null){
+            setErrlogin("Please enter your LoginId")
+        }
+
+        if(Password===""||Password===null){
+            seterrPwd("Please enter your Password")
+        }
+
         if(LoginId===UserId&&Password===Pwd){
             localStorage.setItem("Status","Loggedin")
             localStorage.setItem("UserId",LoginId)
             return Navigate(-1)
         }
-        else{
-            alert("invalid user data")
+
+        if(LoginId!==UserId&&LoginId!==""){
+            setErrlogin("No user found")
+        }
+        if(Password!==Pwd&&Password!==""){
+            seterrPwd("Incorrect Password")
         }
     }
 
@@ -61,11 +80,13 @@ const Login = () => {
                         </div>
                         <label className="Signup-Label">Email</label>
                         <input className="Signup-Input" onChange={(e)=>setLoginId(e.target.value)}/>
+                        <p className="Error-signup">{errLogin}</p>
                         <label className="Signup-Label">Password</label>
                         <div className="Signup-Pwdbox">
                         <input type={show} className="Signup-InputPwd" onChange={(e)=>setPassword(e.target.value)}/>
                         <div onClick={PaswordState}>{icon}</div>
                         </div>
+                        <p className="Error-signup">{errPwd}</p>
                         <div className="Login-sec2">
                             <div className="Remember">
                                 <input type="checkbox"/>
@@ -96,6 +117,32 @@ const Signup=()=>{
         useEffect(() => {
         window.scrollTo(0, 0);
          }, [pathname]);
+
+         const[Name,setName]=useState("")
+         const[Email,setEmail]=useState("")
+         const[Password,setPassword]=useState("")
+
+         const[errName,setEN]=useState("")
+         const[errEmail,setEE]=useState("")
+         const[errPwd,setP]=useState("")
+
+const Register=(e)=>{
+    e.preventDefault()
+    setEN("")
+    setEE("")
+    setP("")
+    if(Name===""||Name===null){
+        setEN("Enter your name")
+    }
+    if(Email===""||Email===null){
+        setEE("Enter your Email")
+    }
+    if(Password===""||Password===null){
+        setP("Enter your password")
+    }
+}
+
+
     return(
         <div>
             <Header />
@@ -105,18 +152,21 @@ const Signup=()=>{
             </div>
             <div className="Signup-card">
                 <div className="Form-div">
-                    <form className="Form">
+                    <form className="Form-signup" onSubmit={Register}>
                         <div className="Signup-title">
                             <h1 className="Signup-heading">SignUp to ABC</h1>
                             <p className="Signup-ptag">Welcome! Register with valid data</p>
                         </div>
                         <label className="Signup-Label">Name</label>
-                        <input className="Signup-Input"/>
+                        <input className="Signup-Input" onChange={(e)=>setName(e.target.value)}/>
+                        <p className="Error-signup">{errName}</p>
                         <label className="Signup-Label">Email</label>
-                        <input className="Signup-Input"/>
+                        <input className="Signup-Input" onChange={(e)=>setEmail(e.target.value)}/>
+                        <p className="Error-signup">{errEmail}</p>
                         <label className="Signup-Label">Password</label>
-                        <input type="password" className="Signup-Input"/>
-                        <button className="Button-Signup">Create Account</button>
+                        <input type="password" className="Signup-Input" onChange={(e)=>setPassword(e.target.value)}/>
+                        <p className="Error-signup">{errPwd}</p>
+                        <button className="Button-Signup" type="submit">Create Account</button>
                         <div className="Already">
                             <p className="Primary-Signup">Already have an account</p>
                             <Link to="/Login"><p className="Secondary-Signup">Login</p></Link>
@@ -136,6 +186,39 @@ const Signup=()=>{
 
 
 const Provider=()=>{
+
+const[Name,setName]=useState("")
+const[Email,setEmail]=useState("")
+const[Password,setPassword]=useState("")
+const[Category,setCategory]=useState("")
+
+const[ErrN,setErrN]=useState("")
+const[ErrE,setErrE]=useState("")
+const[ErrP,setErrP]=useState("")
+const[ErrC,setErrC]=useState("")
+
+const ProviderSubmit=(e)=>{
+
+    e.preventDefault()
+    setErrN("")
+    setErrE("")
+    setErrP("")
+    setErrC("")
+
+    if(Name===""||Name===null){
+        setErrN("Enter your name")
+    }
+    if(Email===""||Email===null){
+        setErrE("Enter your Email")
+    }
+    if(Password===""||Password===null){
+        setErrP("Enter your Password")
+    }
+    if(Category==="Name of service"||Category===null||Category===""){
+        setErrC("Enter your service category")
+    }
+}
+
     return(
         <div>
         <Header />
@@ -145,18 +228,21 @@ const Provider=()=>{
         </div>
         <div className="Signup-card">
             <div className="Form-div">
-                <form className="Form-Provider">
+                <form className="Form-Provider" onSubmit={ProviderSubmit}>
                     <div className="Signup-title">
                         <h1 className="Signup-heading">Register as provider in ABC</h1>
                         <p className="Signup-ptag">Welcome! Register with valid data</p>
                     </div>
                     <label className="Join-Label">Name</label>
-                    <input className="Signup-Input"/>
+                    <input className="Signup-Input" onChange={(e)=>{setName(e.target.value)}}/>
+                    <p className="Error-signup">{ErrN}</p>
                     <label className="Join-Label">Email</label>
-                    <input className="Signup-Input"/>
+                    <input type="email" className="Signup-Input" onChange={(e)=>{setEmail(e.target.value)}}/>
+                    <p className="Error-signup">{ErrE}</p>
                     <label className="Join-Label">Password</label>
-                    <input type="password" className="Signup-Input"/>
-                    <select className="Service-type" placeholder="">
+                    <input type="password" className="Signup-Input" onChange={(e)=>{setPassword(e.target.value)}}/>
+                    <p className="Error-signup">{ErrP}</p>
+                    <select className="Service-type" placeholder="" onChange={(e)=>{setCategory(e.target.value)}}>
                         <option>Name of service</option>
                         <option>Car wash</option>
                         <option>Car Service</option>
@@ -166,6 +252,7 @@ const Provider=()=>{
                         <option>Cleaning</option>
                         <option>Plumbing</option>
                     </select>
+                    <p className="Error-signup">{ErrC}</p>
                     <button className="Button-Signup">Submit</button>
                     <div className="Already">
                         <p className="Primary-Signup">Already have an account</p>
@@ -211,13 +298,35 @@ const AdminLogin = () => {
         }
     }
 
+    const [errLogin,setErrlogin]=useState("")
+    const [errPwd,seterrPwd]=useState("")
+
 
     function FormSubmit(e){
+        setErrlogin("")
+        seterrPwd("")
         e.preventDefault()
         if(Status==="Loggedin"){
             alert('already Logged in with a user account')
         }
-        if(Email===adminEmail&&Password===adminpassword&&Status!="Loggedin"){
+
+        if(Email===""||Email===null){
+            setErrlogin("Please enter your LoginId")
+        }
+
+        if(Password===""||Password===null){
+            seterrPwd("Please enter your Password")
+        }
+
+        else if(Email!==adminEmail&&Email!==""){
+            setErrlogin("No user found")
+        }
+        else if(Password!==adminpassword&&Password!==""){
+            seterrPwd("Incorrect Password")
+        }
+
+
+        if(Email===adminEmail&&Password===adminpassword&&Status!=="Loggedin"){
             localStorage.setItem("adminemail",Email)
             localStorage.setItem("adminpassword",Password)
             window.location.href='/Admin'
@@ -242,11 +351,13 @@ const AdminLogin = () => {
                         </div>
                         <label className="AdminSignup-Label">Email</label>
                         <input className="Signup-Input" onChange={(e)=>setEmail(e.target.value)}/>
+                        <p style={{color:"red"}}>{errLogin}</p>
                         <label className="AdminSignup-Label">Password</label>
                         <div className="Signup-Pwdbox" onChange={(e)=>setPassword(e.target.value)}>
                         <input type={show} className="Signup-InputPwd"/>
                         <div onClick={PaswordState}>{icon}</div>
                         </div>
+                        <p style={{color:"red"}}>{errPwd}</p>
                         <div className="Login-sec2">
                             <div className="Remember">
                                 <input type="checkbox"/>

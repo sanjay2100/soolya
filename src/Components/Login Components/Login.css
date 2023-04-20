@@ -91,10 +91,24 @@ background: url("https://cdn.pixabay.com/photo/2017/10/11/11/43/multitasking-284
     gap: 20px;
     padding: 30px;
     width: 23rem;
-    height: 30rem;
+    height: 35rem;
     box-shadow: 10px 10px 40px rgb(202, 226, 246);
     border-radius: 10px 0px 0px 10px;
 
+}
+
+.Form-signup{
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+    flex-direction: column;
+    text-align: left;
+    gap: 0px;
+    padding: 30px;
+    width: 23rem;
+    height: 40rem;
+    box-shadow: 10px 10px 40px rgb(202, 226, 246);
+    border-radius: 10px 0px 0px 10px;
 }
 
 .Form-Provider{
@@ -106,9 +120,14 @@ background: url("https://cdn.pixabay.com/photo/2017/10/11/11/43/multitasking-284
     gap: 20px;
     padding: 30px;
     width: 23rem;
-    height: 40rem;
     box-shadow: 10px 10px 40px rgb(202, 226, 246);
     border-radius: 10px 0px 0px 10px;
+}
+
+.Error-signup{
+    color: red;
+    margin: 0px;
+    padding: 0px;
 }
 
 .Signup-Label{
@@ -120,7 +139,7 @@ background: url("https://cdn.pixabay.com/photo/2017/10/11/11/43/multitasking-284
 }
 
 .AdminSignup-Label{
-    margin-bottom: -45px;
+    margin-bottom: -30px;
     margin-left: 10px;
     z-index: 2;
     background-color: white;
@@ -250,6 +269,9 @@ background: url("https://cdn.pixabay.com/photo/2017/10/11/11/43/multitasking-284
 
 }
 
+.Form-Provider{
+
+}
 
 @media only screen and (max-width: 600px) {
 
@@ -298,4 +320,3 @@ background: url("https://cdn.pixabay.com/photo/2017/10/11/11/43/multitasking-284
     }
 
 }
-
